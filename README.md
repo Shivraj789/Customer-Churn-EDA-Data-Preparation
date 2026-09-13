@@ -81,3 +81,6 @@ The app does not use browser-side JavaScript or Chart.js. All analysis and visua
 ## Interview explanation
 
 > I built a server-rendered customer churn analytics application using Flask and Pandas. The backend performs data cleaning, missing-value handling, duplicate removal, numeric conversion, outlier inspection, churn-rate calculation, and statistical analysis. I kept the frontend JavaScript-free and used Jinja templates with HTML/CSS for rendering. The application is packaged for deployment on Vercel through a Python Flask entry point.
+>
+> <img width="2940" height="1846" alt="image" src="https://github.com/user-attachments/assets/69ea7e1d-4204-441a-a26c-49f4d283ac84" />
+
