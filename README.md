@@ -1,23 +1,23 @@
-# ChurnLab — Flask EDA Dashboard
+# Customer Churn EDA & Data Preparation — Flask
 
-A polished Flask web application for the YUVA Intern Week 2 assignment: **Exploratory Data Analysis and Data Preparation**.
+A server-rendered **Flask + Pandas** dashboard for customer churn exploratory data analysis and data preparation.
 
 ## Features
 
-- Interactive analytics dashboard
-- Customer churn KPI cards
-- Churn distribution chart
-- Contract vs churn comparison
+- Customer churn KPIs
+- Churn distribution
+- Contract-wise churn analysis
 - Tenure and monthly-charge distributions
-- Customer-level scatter analysis
 - Automatic data cleaning
 - Missing-value handling
 - Duplicate removal
-- Numeric type conversion
+- Numeric conversion
 - IQR outlier inspection
-- CSV upload support
+- CSV upload
 - Cleaned data preview
-- Responsive UI
+- Responsive HTML/CSS UI
+- **No JavaScript**
+- Vercel-ready deployment
 
 ## Tech Stack
 
@@ -25,60 +25,59 @@ A polished Flask web application for the YUVA Intern Week 2 assignment: **Explor
 - Flask
 - Pandas
 - NumPy
-- HTML/CSS
-- JavaScript
-- Chart.js
+- Jinja2
+- HTML5
+- CSS3
+- Vercel
 
-## Run on Mac
+## Project Structure
+
+```text
+Customer-Churn-EDA-Data-Preparation/
+├── app.py
+├── api/
+│   └── index.py
+├── vercel.json
+├── requirements.txt
+├── templates/
+│   ├── base.html
+│   ├── dashboard.html
+│   └── data.html
+├── static/
+│   └── css/
+│       └── style.css
+└── uploads/
+```
+
+## Run locally on Mac
 
 ```bash
+cd Customer-Churn-EDA-Data-Preparation
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python3 app.py
 ```
 
-Open:
+Open `http://127.0.0.1:5000`.
 
-```text
-http://127.0.0.1:5000
+## Deploy to Vercel
+
+This repository contains `vercel.json` and `api/index.py` for a Flask deployment. Import the GitHub repository into Vercel and deploy it as a Python project.
+
+CLI option:
+
+```bash
+npm install -g vercel
+vercel login
+vercel
+vercel --prod
 ```
 
-## Project Structure
+## Important
 
-```text
-customer-churn-flask-dashboard/
-├── app.py
-├── requirements.txt
-├── README.md
-├── templates/
-│   ├── base.html
-│   ├── dashboard.html
-│   └── data.html
-├── static/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── dashboard.js
-└── uploads/
-```
+The app does not use browser-side JavaScript or Chart.js. All analysis and visual bars are generated on the Flask server using Pandas/NumPy and rendered with Jinja templates.
 
-## Dataset
+## Interview explanation
 
-The default dashboard uses the IBM Telco Customer Churn public dataset. You can also upload another CSV from the dashboard.
-
-## Assignment Mapping
-
-| YUVA Requirement | Implementation |
-|---|---|
-| Public dataset | Telco Customer Churn |
-| Data cleaning | Pandas cleaning pipeline |
-| Missing values | Numeric median + zero-tenure handling |
-| Duplicate detection | `drop_duplicates()` |
-| Outlier detection | IQR method |
-| Summary statistics | Dashboard metrics |
-| Histograms | Tenure + Monthly Charges |
-| Scatter plot | Tenure vs Monthly Charges |
-| Pattern analysis | Churn and contract charts |
-| Documentation | README + report |
-# Customer-Churn-EDA-Data-Preparation
+> I built a server-rendered customer churn analytics application using Flask and Pandas. The backend performs data cleaning, missing-value handling, duplicate removal, numeric conversion, outlier inspection, churn-rate calculation, and statistical analysis. I kept the frontend JavaScript-free and used Jinja templates with HTML/CSS for rendering. The application is packaged for deployment on Vercel through a Python Flask entry point.
