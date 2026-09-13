@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ChurnLab{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">C</span><span>Churn<span>Lab</span></span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <a class="nav active" href="{{ url_for('dashboard') }}"><span>⌂</span> Dashboard</a>
+    <a class="nav" href="{{ url_for('data_preview') }}"><span>▦</span> Data Preview</a>
+    <div class="nav-label">PROJECT</div>
+    <a class="nav" href="#upload"><span>↑</span> Upload Dataset</a>
+    <a class="nav" href="#insights"><span>✦</span> Insights</a>
+    <div class="sidebar-bottom">
+      <div class="project-card">
+        <small>WEEK 2 PROJECT</small>
+        <strong>EDA & Data Preparation</strong>
+        <div class="progress"><i></i></div>
+        <small>Analysis ready</small>
+      </div>
+      <a class="nav" href="{{ url_for('reset') }}"><span>↻</span> Reset Dataset</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">DATA SCIENCE / WEEK 02</div>
+        <h1>{% block heading %}Customer Churn Analytics{% endblock %}</h1>
+      </div>
+      <div class="status"><i></i> Dataset connected</div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block heading %}Data Preview{% endblock %}
+{% block content %}
+<div class="page-intro">
+  <span class="tag">CLEANED DATASET</span>
+  <h2>Inspect the prepared records</h2>
+  <p>Showing the first 20 records after data cleaning and transformation. Total records: <strong>{{ total }}</strong>.</p>
+</div>
+<div class="panel table-panel">
+  <div class="table-scroll">
+    <table>
+      <thead><tr>{% for c in columns %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+      <tbody>
+      {% for row in rows %}
+        <tr>{% for c in columns %}<td>{{ row[c] }}</td>{% endfor %}</tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

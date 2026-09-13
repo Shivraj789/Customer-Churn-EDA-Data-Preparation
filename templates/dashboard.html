@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div>
+    <span class="tag">EXPLORATORY DATA ANALYSIS</span>
+    <h2>Understand your customers<br><em>before they leave.</em></h2>
+    <p>Clean, explore and visualize customer behavior through an interactive Flask dashboard.</p>
+  </div>
+  <div class="hero-orb"><div class="orb-inner">EDA</div></div>
+</section>
+
+<section class="metrics">
+  <div class="metric"><span>Customers</span><strong>{{ "{:,}".format(stats.rows) }}</strong><small>records analyzed</small></div>
+  <div class="metric"><span>Churn rate</span><strong>{{ stats.churn_rate }}%</strong><small>customers at risk</small></div>
+  <div class="metric"><span>Avg. monthly</span><strong>${{ stats.avg_monthly }}</strong><small>average charge</small></div>
+  <div class="metric"><span>Avg. tenure</span><strong>{{ stats.avg_tenure }}</strong><small>months</small></div>
+</section>
+
+<section class="grid-two">
+  <div class="panel chart-panel">
+    <div class="panel-head"><div><h3>Churn distribution</h3><p>Retained vs. churned customers</p></div><span class="icon">◒</span></div>
+    <div class="chart-wrap donut"><canvas id="churnChart"></canvas></div>
+  </div>
+
+  <div class="panel chart-panel">
+    <div class="panel-head"><div><h3>Churn by contract</h3><p>Compare customer retention across plans</p></div><span class="icon">▥</span></div>
+    <div class="chart-wrap"><canvas id="contractChart"></canvas></div>
+  </div>
+</section>
+
+<section class="grid-two">
+  <div class="panel chart-panel">
+    <div class="panel-head"><div><h3>Tenure distribution</h3><p>How long customers stay</p></div></div>
+    <div class="chart-wrap"><canvas id="tenureChart"></canvas></div>
+  </div>
+  <div class="panel chart-panel">
+    <div class="panel-head"><div><h3>Monthly charges</h3><p>Customer billing distribution</p></div></div>
+    <div class="chart-wrap"><canvas id="chargesChart"></canvas></div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><div><h3>Tenure vs. monthly charges</h3><p>Interactive customer-level relationship</p></div></div>
+  <div class="scatter-wrap"><canvas id="scatterChart"></canvas></div>
+</section>
+
+<section class="grid-two" id="insights">
+  <div class="panel insight-panel">
+    <div class="panel-head"><div><h3>Key insights</h3><p>Automatically generated from the dataset</p></div><span class="spark">✦</span></div>
+    {% for insight in insights %}
+      <div class="insight"><span>{{ loop.index }}</span><p>{{ insight }}</p></div>
+    {% endfor %}
+  </div>
+
+  <div class="panel quality">
+    <div class="panel-head"><div><h3>Data quality</h3><p>Preparation checks</p></div></div>
+    <div class="quality-row"><span>Missing values</span><strong>{{ stats.missing }}</strong></div>
+    <div class="quality-row"><span>Potential outliers</span><strong>{{ stats.outliers }}</strong></div>
+    <div class="quality-row"><span>Columns analyzed</span><strong>{{ stats.columns }}</strong></div>
+    <div class="quality-badge">✓ Cleaned & prepared</div>
+  </div>
+</section>
+
+<section class="panel upload-panel" id="upload">
+  <div>
+    <span class="tag">OPTIONAL</span>
+    <h3>Analyze your own CSV</h3>
+    <p>Upload a compatible customer dataset and the dashboard will recalculate the metrics and charts.</p>
+  </div>
+  <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+    <label class="upload-button">Choose CSV<input type="file" name="dataset" accept=".csv" required onchange="this.form.submit()"></label>
+  </form>
+</section>
+
+<script>
+window.CHARTS = {{ charts|tojson }};
+</script>
+{% endblock %}
